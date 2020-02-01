@@ -10,7 +10,7 @@ library(janitor)
 library(tidyr)
 library(sf)
 library(transformr)
-library(gridExtra)
+library(gtable)
 library(ggpubr)
 
 # Read in data
