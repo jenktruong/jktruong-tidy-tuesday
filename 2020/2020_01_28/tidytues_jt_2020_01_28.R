@@ -77,10 +77,18 @@ sf_tree_map <- ggplot() +
   geom_sf(data = sf_trees_spatial,
           aes(color = species),
           alpha = 0.5) +
-  theme_minimal()
+  theme_minimal() +
+  theme(
+    axis.text = element_blank(), # Remove axis text
+    panel.grid = element_blank() # Remove graticule behind map
+  )
 
 sf_tree_map
 
 # ----
 # 3. Graph abundance over time
+# ----
+
+# ----
+# 4. Combine graphs together
 # ----
