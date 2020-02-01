@@ -74,9 +74,11 @@ ggplot() +
 
 # Combine: 
 sf_tree_map <- ggplot() +
-  geom_sf(data = sf_border) +
+  geom_sf(data = sf_border,
+          fill = "white") +
   geom_sf(data = sf_trees_spatial,
-          aes(color = species), # Color points by species
+          aes(color = species,
+              fill = species), # Color points by species
           alpha = 0.5) +
   theme_minimal() +
   theme(
