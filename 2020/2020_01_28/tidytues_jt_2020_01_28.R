@@ -11,6 +11,7 @@ library(tidyr)
 library(sf)
 library(transformr)
 library(gridExtra)
+library(ggpubr)
 
 # Read in data
 
@@ -128,9 +129,33 @@ sf_tree_line
 # 4. Combine graphs together
 # ----
 
-sf_tree_combine <- grid.arrange(sf_tree_map, 
-                                sf_tree_line, 
-                                ncol = 2, # Specify that you want the two graphs in columns
-                                top = "The Five Most Recorded Tree Species in San Francisco") 
+# Create grobs for title, caption, and credits
+
+sf_tree_title <- text_grob("The Five Most Recorded Tree Species in San Francisco",
+                          just = "center", hjust = 0.5, vjust = NULL,
+                          rot = 0, color = "green4", face = "bold", size = 18)
+
+sf_tree_caption <- ggparagraph("The following five tree species - Brisbane Box, Swamp Myrtle, Hybrid Strawberry Tree, Sycamore 'London Plane', and Southern Magnolia - have the most observations in the city. Here, we show their distribution through space and time.",
+                               color = "green4", size = 10, face = NULL,
+                               family = NULL, lineheight = NULL)
+
+sf_tree_credits <- text_grob("Data: DataSF\n Viz: @jktruong1\n #TidyTuesday",
+                             just = "right", hjust = 1, vjust = 0,
+                             rot = 0, color = "green4", face = NULL, size = 8)
+
+# Set up layout matrix
+
+lay <- rbind(c(1,1,1,1),
+             c(2,2,2,2),
+             c(3,3,4,4),
+             c(3,3,4,4),
+             c(5,5,5,5))
+
+sf_tree_combine <- grid.arrange(sf_tree_title,
+                                sf_tree_caption,
+                                sf_tree_map, 
+                                sf_tree_line,
+                                sf_tree_credits,
+                                layout_matrix = lay) # Specify that you want the two graphs in columns
 
 sf_tree_combine
