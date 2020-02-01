@@ -125,7 +125,7 @@ sf_tree_line <- ggplot(data = sf_trees_select,
                    fill = species),
                size = 1,
                alpha = 0.7,
-               show.legend = FALSE) +
+               show.legend = FALSE) + # Don't show legend for timeline
   labs(x = "Year",
        y = "Density") + # Change axis titles
   facet_wrap(species ~ ., # facet by species vertically
@@ -163,13 +163,12 @@ sf_tree_caption <- ggparagraph("The following five tree species - Brisbane Box, 
 
 sf_tree_credits <- text_grob("Data: DataSF || Viz: @jktruong1 || #TidyTuesday",
                              just = "right", hjust = 1, vjust = 0,
-                             rot = 0, color = "green4", face = NULL, size = 8)
+                             rot = 0, color = "green4", face = NULL, size = 10)
 
 # Set up layout matrix
 
 lay <- rbind(c(1,1,1,1),
-             c(NA,NA,NA,NA),
-             c(2,2,2,2),
+             c(NA,2,2,NA),
              c(3,3,4,4),
              c(3,3,4,4),
              c(3,3,4,4),
@@ -179,7 +178,7 @@ lay <- rbind(c(1,1,1,1),
              c(3,3,4,4),
              c(3,3,4,4),
              c(3,3,4,4),
-             c(NA,NA,5,5))
+             c(NA,5,5,NA))
 
 sf_tree_combine <- grid.arrange(sf_tree_title,
                                 sf_tree_caption,
