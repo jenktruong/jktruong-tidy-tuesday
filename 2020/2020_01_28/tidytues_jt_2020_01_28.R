@@ -80,12 +80,15 @@ sf_tree_map <- ggplot() +
           aes(color = species,
               fill = species), # Color points by species
           alpha = 0.5) +
+  labs(fill = "Tree Species",
+       color = "Tree Species") + # Change legend title
   theme_minimal() +
   theme(
     axis.text = element_blank(), # Remove axis text
     panel.grid = element_blank(), # Remove graticule behind map
     legend.position = "bottom", # Move legend below map
-    legend.direction = "vertical" # Place items in legend vertically
+    legend.direction = "vertical", # Place items in legend vertically
+    legend.title.align = 0.5 # Center legend title
   )
 
 sf_tree_map
@@ -101,6 +104,8 @@ sf_tree_line <- ggplot(data = sf_trees_select,
                size = 1,
                alpha = 0.7,
                show.legend = FALSE) +
+  labs(x = "Year",
+       y = "Population") + # Change axis titles
   facet_wrap(species ~ ., # facet by species vertically
              ncol = 1, # Keep to one column
              scales = "free") + # axis scales resize based on data
