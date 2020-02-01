@@ -31,19 +31,6 @@ sf_trees_top5 <- sf_trees_df %>%
   arrange(-n) %>%  # Arrange in descending order
   head(5) # Keep top 5 rows (has the most observations)
 
-# Create vector from previous data frame as character vector
-
-tree_factor <- as.vector(sf_trees_top5$species)
-
-# Convert vector to factor
-
-tree_fct_reorder <- factor(tree_factor,
-                           levels = c("Lophostemon confertus :: Brisbane Box",
-                                      "Tristaniopsis laurina :: Swamp Myrtle",
-                                      "Arbutus 'Marina' :: Hybrid Strawberry Tree",
-                                      "Platanus x hispanica :: Sycamore: London Plane",
-                                      "Magnolia grandiflora :: Southern Magnolia"))
-
 # Go back to data frame and select only rows with those 5 species
 
 sf_trees_select <- sf_trees_df %>% 
@@ -52,6 +39,16 @@ sf_trees_select <- sf_trees_df %>%
                         "Arbutus 'Marina' :: Hybrid Strawberry Tree",
                         "Platanus x hispanica :: Sycamore: London Plane",
                         "Magnolia grandiflora :: Southern Magnolia"))
+
+# Change species variable in data frame to reordered factor
+
+sf_trees_select$species <- factor(sf_trees_select$species,
+                                  levels = c("Lophostemon confertus :: Brisbane Box",
+                                             "Tristaniopsis laurina :: Swamp Myrtle",
+                                             "Arbutus 'Marina' :: Hybrid Strawberry Tree",
+                                             "Platanus x hispanica :: Sycamore: London Plane",
+                                             "Magnolia grandiflora :: Southern Magnolia"))
+  
 
 # ----
 # 2. Graph location of trees in SF by creating a map
@@ -62,6 +59,7 @@ sf_trees_select <- sf_trees_df %>%
 sf_trees_spatial <- st_as_sf(sf_trees_select, 
                              coords = c("longitude","latitude")) %>% 
   select(species,geometry)
+  
 
 plot(sf_trees_spatial)
 
