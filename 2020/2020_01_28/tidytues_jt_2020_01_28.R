@@ -69,7 +69,8 @@ ggplot() +
   geom_sf(data = sf_trees_spatial)
 
 ggplot() +
-  geom_sf(data = sf_border)
+  geom_sf(data = sf_border,
+          fill = "white")
 
 # Combine: 
 sf_tree_map <- ggplot() +
@@ -80,7 +81,9 @@ sf_tree_map <- ggplot() +
   theme_minimal() +
   theme(
     axis.text = element_blank(), # Remove axis text
-    panel.grid = element_blank() # Remove graticule behind map
+    panel.grid = element_blank(), # Remove graticule behind map
+    legend.position = "bottom", # Move legend below map
+    legend.direction = "vertical" # Place items in legend vertically
   )
 
 sf_tree_map
@@ -104,3 +107,9 @@ sf_tree_line
 # ----
 # 4. Combine graphs together
 # ----
+
+sf_tree_combine <- grid.arrange(sf_tree_map, 
+                                sf_tree_line, 
+                                ncol = 2) # Specify that you want the two graphs in columns
+
+sf_tree_combine
