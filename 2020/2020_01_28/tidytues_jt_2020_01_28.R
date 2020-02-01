@@ -31,9 +31,18 @@ sf_trees_top5 <- sf_trees_df %>%
   arrange(-n) %>%  # Arrange in descending order
   head(5) # Keep top 5 rows (has the most observations)
 
-# Create vector for factor
+# Create vector from previous data frame as character vector
 
 tree_factor <- as.vector(sf_trees_top5$species)
+
+# Convert vector to factor
+
+tree_fct_reorder <- factor(tree_factor,
+                           levels = c("Lophostemon confertus :: Brisbane Box",
+                                      "Tristaniopsis laurina :: Swamp Myrtle",
+                                      "Arbutus 'Marina' :: Hybrid Strawberry Tree",
+                                      "Platanus x hispanica :: Sycamore: London Plane",
+                                      "Magnolia grandiflora :: Southern Magnolia"))
 
 # Go back to data frame and select only rows with those 5 species
 
