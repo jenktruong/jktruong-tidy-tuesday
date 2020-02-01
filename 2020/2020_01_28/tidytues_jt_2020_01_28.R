@@ -90,7 +90,7 @@ ggplot() +
 sf_tree_map <- ggplot() +
   geom_sf(data = sf_border,
           fill = "white",
-          color = "yellow4") +
+          color = "yellow4") + # Fill shapefile to make it hollow and color lines as "yellow4"
   geom_sf(data = sf_trees_spatial,
           aes(color = species,
               fill = species), # Color points by species
@@ -107,7 +107,7 @@ sf_tree_map <- ggplot() +
                                 size = 10,
                                 color = "chartreuse4"), # Change legend title format
     legend.title.align = 0.5, # Center legend title
-    legend.key.size = unit(0.1, "cm"), # Specify key size
+    legend.key.size = unit(0.3, "cm"), # Specify key size
     legend.text = element_text(face = "italic",
                                size = 8, 
                                color = "chartreuse4") # Change legend label color
@@ -131,7 +131,18 @@ sf_tree_line <- ggplot(data = sf_trees_select,
   facet_wrap(species ~ ., # facet by species vertically
              ncol = 1, # Keep to one column
              scales = "free") + # axis scales resize based on data
-  theme_minimal()
+  theme_minimal() +
+  theme(
+    panel.grid = element_line(color = "chartreuse4"), # Change grid color to yellow4
+    axis.title = element_text(face = "bold",
+                              size = 10,
+                              color = "chartreuse4"), # Change axis label colors and bold them
+    axis.text = element_text(size = 8,
+                             color = "chartreuse4"), # Change axis tick label colors
+    strip.text = element_text(face = "italic",
+                              size = 8,
+                              color = "chartreuse4") # change facet label font 
+  )
 
 sf_tree_line
 
@@ -157,6 +168,9 @@ sf_tree_credits <- text_grob("Data: DataSF\n Viz: @jktruong1\n #TidyTuesday",
 
 lay <- rbind(c(1,1,1,1),
              c(2,2,2,2),
+             c(3,3,4,4),
+             c(3,3,4,4),
+             c(3,3,4,4),
              c(3,3,4,4),
              c(3,3,4,4),
              c(3,3,4,4),
