@@ -52,7 +52,7 @@ sf_trees_spatial <- st_as_sf(sf_trees_select,
 
 plot(sf_trees_spatial)
 
-st_crs(sf_trees_spatial) <- 4326
+st_crs(sf_trees_spatial) <- 4326 # Specify projection!
 
 # Read in SF neighborhood boundary shapefile
 
@@ -75,7 +75,7 @@ ggplot() +
 sf_tree_map <- ggplot() +
   geom_sf(data = sf_border) +
   geom_sf(data = sf_trees_spatial,
-          aes(color = species),
+          aes(color = species), # Color points by species
           alpha = 0.5) +
   theme_minimal() +
   theme(
@@ -91,12 +91,12 @@ sf_tree_map
 
 sf_tree_line <- ggplot(data = sf_trees_select,
                        aes(x = date)) +
-  geom_density(aes(color = species,
+  geom_density(aes(color = species, # color line by species
                    fill = species),
                size = 1,
                alpha = 0.7,
                show.legend = FALSE) +
-  facet_wrap(species ~ .) +
+  facet_wrap(species ~ .) + # facet by species vertically
   theme_minimal()
 
 sf_tree_line
