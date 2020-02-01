@@ -50,16 +50,37 @@ sf_trees_spatial <- st_as_sf(sf_trees_select,
                              coords = c("longitude","latitude")) %>% 
   select(species,geometry)
 
-# Plot points - just to see what it's like!
-
 plot(sf_trees_spatial)
+
+st_crs(sf_trees_spatial) <- 4326
 
 # Read in SF neighborhood boundary shapefile
 
-sf_border <- read_sf(here::here("SF Find Neighborhoods", "ca_state_border"), layer = "CA_State_TIGER2016")
+sf_border <- read_sf(here::here("2020", "2020_01_28", "SF_Find_Neighborhoods"),
+                     layer = "geo_export_9263930d-f53b-40e2-a384-89952e0799c6")
 
-plot(ca_border)
+plot(sf_border)
 
-# Specify projection
+st_crs(sf_border) # View projection - Projection is 4326!
 
-# 3. Graph abuncance
+# Then plot them together with ggplot2!
+
+ggplot() +
+  geom_sf(data = sf_trees_spatial)
+
+ggplot() +
+  geom_sf(data = sf_border)
+
+# Combine: 
+sf_tree_map <- ggplot() +
+  geom_sf(data = sf_border) +
+  geom_sf(data = sf_trees_spatial,
+          aes(color = species),
+          alpha = 0.5) +
+  theme_minimal()
+
+sf_tree_map
+
+# ----
+# 3. Graph abundance over time
+# ----
