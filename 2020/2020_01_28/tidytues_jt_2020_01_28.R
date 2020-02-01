@@ -12,6 +12,8 @@ library(sf)
 library(transformr)
 library(gtable)
 library(ggpubr)
+library(grid)
+library(gridExtra)
 
 # Read in data
 
@@ -135,7 +137,7 @@ sf_tree_title <- text_grob("The Five Most Recorded Tree Species in San Francisco
                           just = "center", hjust = 0.5, vjust = NULL,
                           rot = 0, color = "green4", face = "bold", size = 18)
 
-sf_tree_caption <- ggparagraph("The following five tree species - Brisbane Box, Swamp Myrtle, Hybrid Strawberry Tree, Sycamore 'London Plane', and Southern Magnolia - have the most observations in the city. Here, we show their distribution through space and time.",
+sf_tree_caption <- ggparagraph("The following five tree species - Brisbane Box, Swamp Myrtle, Hybrid Strawberry Tree, Sycamore 'London Plane', and Southern Magnolia - have the most observations in the city. Here, we show their distribution throughout space and time.",
                                color = "green4", size = 10, face = NULL,
                                family = NULL, lineheight = NULL)
 
@@ -147,6 +149,7 @@ sf_tree_credits <- text_grob("Data: DataSF\n Viz: @jktruong1\n #TidyTuesday",
 
 lay <- rbind(c(1,1,1,1),
              c(2,2,2,2),
+             c(3,3,4,4),
              c(3,3,4,4),
              c(3,3,4,4),
              c(5,5,5,5))
