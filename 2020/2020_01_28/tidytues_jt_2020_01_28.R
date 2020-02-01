@@ -89,7 +89,8 @@ ggplot() +
 # Combine: 
 sf_tree_map <- ggplot() +
   geom_sf(data = sf_border,
-          fill = "white") +
+          fill = "white",
+          color = "yellow4") +
   geom_sf(data = sf_trees_spatial,
           aes(color = species,
               fill = species), # Color points by species
@@ -102,7 +103,14 @@ sf_tree_map <- ggplot() +
     panel.grid = element_blank(), # Remove graticule behind map
     legend.position = "bottom", # Move legend below map
     legend.direction = "vertical", # Place items in legend vertically
-    legend.title.align = 0.5 # Center legend title
+    legend.title = element_text(face = "bold",
+                                size = 10,
+                                color = "chartreuse4"), # Change legend title format
+    legend.title.align = 0.5, # Center legend title
+    legend.key.size = unit(0.1, "cm"), # Specify key size
+    legend.text = element_text(face = "italic",
+                               size = 8, 
+                               color = "chartreuse4") # Change legend label color
   )
 
 sf_tree_map
