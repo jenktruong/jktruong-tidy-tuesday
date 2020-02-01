@@ -6,13 +6,11 @@
 
 library(tidyverse)
 library(here)
-library(pryr)
-library(visdat)
-library(skimr)
-library(lubridate)
-library(leaflet)
 library(janitor)
 library(tidyr)
+library(sf)
+library(transformr)
+library(gridExtra)
 
 # Read in data
 
@@ -42,6 +40,26 @@ sf_trees_select <- sf_trees_df %>%
                         "Platanus x hispanica :: Sycamore: London Plane",
                         "Magnolia grandiflora :: Southern Magnolia"))
 
+# ----
 # 2. Graph location
+# ----
+
+# Make sure R reads longitude and latitude data as spatial data
+
+sf_trees_spatial <- st_as_sf(sf_trees_select, 
+                             coords = c("longitude","latitude")) %>% 
+  select(species,geometry)
+
+# Plot points - just to see what it's like!
+
+plot(sf_trees_spatial)
+
+# Read in SF neighborhood boundary shapefile
+
+sf_border <- read_sf(here::here("SF Find Neighborhoods", "ca_state_border"), layer = "CA_State_TIGER2016")
+
+plot(ca_border)
+
+# Specify projection
 
 # 3. Graph abuncance
