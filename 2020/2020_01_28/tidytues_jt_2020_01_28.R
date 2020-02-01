@@ -31,6 +31,10 @@ sf_trees_top5 <- sf_trees_df %>%
   arrange(-n) %>%  # Arrange in descending order
   head(5) # Keep top 5 rows (has the most observations)
 
+# Create vector for factor
+
+tree_factor <- as.vector(sf_trees_top5$species)
+
 # Go back to data frame and select only rows with those 5 species
 
 sf_trees_select <- sf_trees_df %>% 
