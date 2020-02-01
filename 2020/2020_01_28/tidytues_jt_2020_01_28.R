@@ -116,7 +116,7 @@ sf_tree_line <- ggplot(data = sf_trees_select,
                alpha = 0.7,
                show.legend = FALSE) +
   labs(x = "Year",
-       y = "Population") + # Change axis titles
+       y = "Density") + # Change axis titles
   facet_wrap(species ~ ., # facet by species vertically
              ncol = 1, # Keep to one column
              scales = "free") + # axis scales resize based on data
@@ -130,6 +130,7 @@ sf_tree_line
 
 sf_tree_combine <- grid.arrange(sf_tree_map, 
                                 sf_tree_line, 
-                                ncol = 2) # Specify that you want the two graphs in columns
+                                ncol = 2, # Specify that you want the two graphs in columns
+                                top = "The Five Most Recorded Tree Species in San Francisco") 
 
 sf_tree_combine
