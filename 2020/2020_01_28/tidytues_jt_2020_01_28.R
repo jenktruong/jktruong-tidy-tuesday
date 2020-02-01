@@ -90,7 +90,7 @@ ggplot() +
 sf_tree_map <- ggplot() +
   geom_sf(data = sf_border,
           fill = "white",
-          color = "chartreuse4") + # Fill shapefile to make it hollow and color lines as "yellow4"
+          color = "chartreuse3") + # Fill shapefile to make it hollow and color lines as "yellow4"
   geom_sf(data = sf_trees_spatial,
           aes(color = species,
               fill = species), # Color points by species
@@ -133,7 +133,8 @@ sf_tree_line <- ggplot(data = sf_trees_select,
              scales = "free") + # axis scales resize based on data
   theme_minimal() +
   theme(
-    panel.grid = element_line(color = "chartreuse4"), # Change grid color to yellow4
+    panel.grid = element_line(color = "chartreuse3"), # Change grid color to chartreuse4
+    panel.grid.minor = element_blank(),
     axis.title = element_text(face = "bold",
                               size = 10,
                               color = "chartreuse4"), # Change axis label colors and bold them
@@ -141,7 +142,7 @@ sf_tree_line <- ggplot(data = sf_trees_select,
                              color = "chartreuse4"), # Change axis tick label colors
     strip.text = element_text(face = "italic",
                               size = 8,
-                              color = "chartreuse4") # change facet label font 
+                              color = "chartreuse4"), # change facet label font
   )
 
 sf_tree_line
@@ -160,7 +161,7 @@ sf_tree_caption <- ggparagraph("The following five tree species - Brisbane Box, 
                                color = "green4", size = 10, face = NULL,
                                family = NULL, lineheight = NULL)
 
-sf_tree_credits <- text_grob("Data: DataSF\n Viz: @jktruong1\n #TidyTuesday",
+sf_tree_credits <- text_grob("Data: DataSF || Viz: @jktruong1 || #TidyTuesday",
                              just = "right", hjust = 1, vjust = 0,
                              rot = 0, color = "green4", face = NULL, size = 8)
 
@@ -178,10 +179,6 @@ lay <- rbind(c(1,1,1,1),
              c(3,3,4,4),
              c(3,3,4,4),
              c(3,3,4,4),
-             c(3,3,4,4),
-             c(3,3,4,4),
-             c(3,3,4,4),
-             c(NA,NA,NA,NA),
              c(NA,NA,5,5))
 
 sf_tree_combine <- grid.arrange(sf_tree_title,
