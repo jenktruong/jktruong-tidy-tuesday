@@ -90,7 +90,7 @@ ggplot() +
 sf_tree_map <- ggplot() +
   geom_sf(data = sf_border,
           fill = "white",
-          color = "yellow4") + # Fill shapefile to make it hollow and color lines as "yellow4"
+          color = "chartreuse4") + # Fill shapefile to make it hollow and color lines as "yellow4"
   geom_sf(data = sf_trees_spatial,
           aes(color = species,
               fill = species), # Color points by species
@@ -167,6 +167,7 @@ sf_tree_credits <- text_grob("Data: DataSF\n Viz: @jktruong1\n #TidyTuesday",
 # Set up layout matrix
 
 lay <- rbind(c(1,1,1,1),
+             c(NA,NA,NA,NA),
              c(2,2,2,2),
              c(3,3,4,4),
              c(3,3,4,4),
@@ -174,7 +175,14 @@ lay <- rbind(c(1,1,1,1),
              c(3,3,4,4),
              c(3,3,4,4),
              c(3,3,4,4),
-             c(5,5,5,5))
+             c(3,3,4,4),
+             c(3,3,4,4),
+             c(3,3,4,4),
+             c(3,3,4,4),
+             c(3,3,4,4),
+             c(3,3,4,4),
+             c(NA,NA,NA,NA),
+             c(NA,NA,5,5))
 
 sf_tree_combine <- grid.arrange(sf_tree_title,
                                 sf_tree_caption,
