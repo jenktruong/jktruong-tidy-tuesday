@@ -99,7 +99,9 @@ sf_tree_line <- ggplot(data = sf_trees_select,
                size = 1,
                alpha = 0.7,
                show.legend = FALSE) +
-  facet_wrap(species ~ .) + # facet by species vertically
+  facet_wrap(species ~ ., # facet by species vertically
+             ncol = 1, # Keep to one column
+             scales = "free") + # axis scales resize based on data
   theme_minimal()
 
 sf_tree_line
