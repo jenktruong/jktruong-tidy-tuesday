@@ -41,7 +41,7 @@ sf_trees_select <- sf_trees_df %>%
                         "Magnolia grandiflora :: Southern Magnolia"))
 
 # ----
-# 2. Graph location
+# 2. Graph location of trees in SF by creating a map
 # ----
 
 # Make sure R reads longitude and latitude data as spatial data
@@ -88,6 +88,18 @@ sf_tree_map
 # ----
 # 3. Graph abundance over time
 # ----
+
+sf_tree_line <- ggplot(data = sf_trees_select,
+                       aes(x = date)) +
+  geom_density(aes(color = species,
+                   fill = species),
+               size = 1,
+               alpha = 0.7,
+               show.legend = FALSE) +
+  facet_wrap(species ~ .) +
+  theme_minimal()
+
+sf_tree_line
 
 # ----
 # 4. Combine graphs together
