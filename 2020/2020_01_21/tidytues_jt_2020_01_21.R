@@ -1,5 +1,5 @@
 ##########
-# Tidy Tuesday Week 3 2020: Trees in San Francisco
+# Tidy Tuesday Week 3 2020: Spotify Playlists
 # January 21, 2020
 # Jennifer Truong
 ##########
