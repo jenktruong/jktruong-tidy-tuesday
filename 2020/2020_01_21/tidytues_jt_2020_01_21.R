@@ -1,3 +1,9 @@
+##########
+# Tidy Tuesday Week 3 2020: Trees in San Francisco
+# January 21, 2020
+# Jennifer Truong
+##########
+
 # Attach packages
 
 library(tidyverse)
