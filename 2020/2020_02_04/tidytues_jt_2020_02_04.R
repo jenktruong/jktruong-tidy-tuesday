@@ -28,7 +28,6 @@ sb_join <- dplyr::left_join(attendance,
 # Filter data to Super Bowl winners
 
 sb_join_clean <- sb_join %>% 
-  drop_na() %>%  # Drop NA values
   rename("total_attendance" = "total") %>%  # Rename "total" column to reflect attendance
   filter(sb_winner == "Won Superbowl") # Filter to only teams that made it to playoffs
 
