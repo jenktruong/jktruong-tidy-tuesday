@@ -23,3 +23,11 @@ games <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidy
 sb_join <- dplyr::left_join(attendance,
                             standings,
                             by = c("year", "team_name", "team"))
+
+# Clean data
+
+sb_join_clean <- sb_join %>% 
+  drop_na() %>%  # Drop NA values
+  rename("total_attendance" = "total") %>%  # Rename "total" column to reflect attendance
+  filter(playoffs == "Playoffs") # Filter to only teams that made it to playoffs
+
