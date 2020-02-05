@@ -18,3 +18,8 @@ attendance <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience
 standings <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-02-04/standings.csv')
 games <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-02-04/games.csv')
 
+# Join attendance and standings data frames together
+
+sb_join <- dplyr::left_join(attendance,
+                            standings,
+                            by = c("year", "team_name", "team"))
