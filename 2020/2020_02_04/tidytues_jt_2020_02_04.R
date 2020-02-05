@@ -14,7 +14,8 @@ library(tidyverse)
 
 # Read in Super Bowl data
 
-attendance <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-02-04/attendance.csv')
+attendance <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-02-04/attendance.csv') %>% 
+  pivot_wider(names_from = week, values_from = weekly_attendance) # Clean data by pivoting wider by weekly attendance
 standings <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-02-04/standings.csv')
 games <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-02-04/games.csv')
 
@@ -24,10 +25,10 @@ sb_join <- dplyr::left_join(attendance,
                             standings,
                             by = c("year", "team_name", "team"))
 
-# Clean data
+# Filter data to Super Bowl winners
 
 sb_join_clean <- sb_join %>% 
   drop_na() %>%  # Drop NA values
   rename("total_attendance" = "total") %>%  # Rename "total" column to reflect attendance
-  filter(playoffs == "Playoffs") # Filter to only teams that made it to playoffs
+  filter(sb_winner == "Won Superbowl") # Filter to only teams that made it to playoffs
 
