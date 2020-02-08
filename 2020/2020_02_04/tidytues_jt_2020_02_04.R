@@ -55,12 +55,12 @@ sb_off <- ggplot(sb_join_clean,
   labs(x = "Team",
        y = "Offensive Ranking") + # Rename axis labels
   geom_text(aes(label = offensive_ranking),
-            nudge_y = 0.5,
+            nudge_y = 2,
             check_overlap = T, # Make sure labels don't overlap
             size = 2) + # Add data labels
   scale_x_discrete(labels = str_wrap(sb_join_clean$full_team_name,
                    width = 9)) + # Wrap axis tick labels
-  scale_y_continuous(lim = c(-2.0,12.0),
+  scale_y_continuous(lim = c(-2.0,14.0),
                      expand = c(0,0)) + # Extend limits of y axis
   theme_light() +
   theme(
@@ -80,12 +80,12 @@ sb_def <- ggplot(sb_join_clean,
   labs(x = "Team",
        y = "Defensive Ranking") + # Rename axis labels
   geom_text(aes(label = defensive_ranking),
-    nudge_y = 0.5,
+    nudge_y = 2,
     check_overlap = T, # Make sure labels don't overlap
     size = 2) + # Add data labels
   scale_x_discrete(labels = str_wrap(sb_join_clean$full_team_name,
                                      width = 9)) + # Wrap axis tick labels
-  scale_y_continuous(lim = c(-2.0,12.0),
+  scale_y_continuous(lim = c(-4.0,12.0),
                      expand = c(0,0)) + # Extend limits of y axis
   theme_light() +
   theme(
