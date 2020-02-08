@@ -11,6 +11,8 @@
 # Attach packages
 
 library(tidyverse)
+library(ggpubr)
+library(gridExtra)
 
 # Read in Super Bowl data
 
@@ -31,11 +33,20 @@ sb_join_clean <- sb_join %>%
   rename("total_attendance" = "total") %>%  # Rename "total" column to reflect attendance
   filter(sb_winner == "Won Superbowl") # Filter to only teams that made it to playoffs
 
-# Make double bar graphs of offensive and defensive margins
+# Make two bar graphs for offensive and defensive rankings
 
-sb_margins_graph <- ggplot(sb_join_clean,
-                           aes(x = team,
-                               y = offensive_ranking)) +
-  geom_col()
+sb_off <- ggplot(sb_join_clean,
+                 aes(x = team,
+                     y = offensive_ranking)) +
+  geom_col(fill = "red") # Color bars red
 
-sb_margins_graph  
+sb_def <- ggplot(sb_join_clean,
+                 aes(x = team,
+                     y = defensive_ranking)) +
+  geom_col(fill = "blue") # Color bars blue
+
+# Place both bar graphs together
+
+sb_margins_graph <- grid.arrange(sb_off,
+                                 sb_def,
+                                 nrow = 2)
