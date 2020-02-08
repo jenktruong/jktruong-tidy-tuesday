@@ -56,6 +56,8 @@ sb_off <- ggplot(sb_join_clean,
        y = "Offensive Ranking") + # Rename axis labels
   scale_x_discrete(labels = str_wrap(sb_join_clean$full_team_name,
                    width = 10)) + # Wrap axis tick labels
+  scale_y_continuous(lim = c(-2.0,12.0),
+                     expand = c(0,0)) + # Extend limits of y axis
   theme_light() +
   theme(
     axis.text = element_text(size = 6), # Adjust axis label font size
@@ -73,7 +75,8 @@ sb_def <- ggplot(sb_join_clean,
        y = "Defensive Ranking") + # Rename axis labels
   scale_x_discrete(labels = str_wrap(sb_join_clean$full_team_name,
                                      width = 10)) + # Wrap axis tick labels
-  scale_y_continuous(limits = c(0.0,10.0)) + # Extend limits of y axis
+  scale_y_continuous(lim = c(-2.0,12.0),
+                     expand = c(0,0)) + # Extend limits of y axis
   theme_light() +
   theme(
     axis.text = element_text(size = 6), # Adjust axis label font size
