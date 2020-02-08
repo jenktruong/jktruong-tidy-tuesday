@@ -31,3 +31,11 @@ sb_join_clean <- sb_join %>%
   rename("total_attendance" = "total") %>%  # Rename "total" column to reflect attendance
   filter(sb_winner == "Won Superbowl") # Filter to only teams that made it to playoffs
 
+# Make double bar graphs of offensive and defensive margins
+
+sb_margins_graph <- ggplot(sb_join_clean,
+                           aes(x = team,
+                               y = offensive_ranking)) +
+  geom_col()
+
+sb_margins_graph  
