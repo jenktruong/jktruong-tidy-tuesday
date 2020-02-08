@@ -55,13 +55,15 @@ sb_off <- ggplot(sb_join_clean,
   labs(x = "Team",
        y = "Offensive Ranking") + # Rename axis labels
   scale_x_discrete(labels = str_wrap(sb_join_clean$full_team_name,
-                   width = 10)) + # Wrap axis tick labels
+                   width = 9)) + # Wrap axis tick labels
   scale_y_continuous(lim = c(-2.0,12.0),
                      expand = c(0,0)) + # Extend limits of y axis
   theme_light() +
   theme(
-    axis.text = element_text(size = 6), # Adjust axis label font size
-    axis.title = element_text(size = 10) # Adjust axis title font size
+    axis.text = element_text(size = 7), # Adjust axis label font size
+    axis.title = element_text(size = 10,
+                              face = "bold"), # Adjust axis title font size
+    axis.title.x = element_blank() # Remove y-axis title to avoid redundancy
   )
 
 # Defensive ranking bar graph 
@@ -74,19 +76,52 @@ sb_def <- ggplot(sb_join_clean,
   labs(x = "Team",
        y = "Defensive Ranking") + # Rename axis labels
   scale_x_discrete(labels = str_wrap(sb_join_clean$full_team_name,
-                                     width = 10)) + # Wrap axis tick labels
+                                     width = 9)) + # Wrap axis tick labels
   scale_y_continuous(lim = c(-2.0,12.0),
                      expand = c(0,0)) + # Extend limits of y axis
   theme_light() +
   theme(
-    axis.text = element_text(size = 6), # Adjust axis label font size
-    axis.title = element_text(size = 10) # Adjust axis title font size
+    axis.text = element_text(size = 7), # Adjust axis label font size
+    axis.title = element_text(size = 10,
+                              face = "bold") # Adjust axis title font size
   )
 
 # -----
 # Place both bar graphs together
 # -----
 
-sb_margins_graph <- grid.arrange(sb_off,
+# Create grobs for title, paragraph, and credits
+
+sb_title <- text_grob("Offensive and Defensive Rankings of Super Bowl Winners",
+                           just = "center", hjust = 0.5, vjust = NULL,
+                           rot = 0, face = "bold", size = 14)
+
+sb_caption <- ggparagraph("Here we examine the offensive and defensive rankings of each Super Bowl winner in the past 20 years. Rankings were measured as team offensive/defensive quality relative to average (0.0) using SRS (Simple Ranking System).",
+                               size = 8, face = NULL,
+                               family = NULL, lineheight = NULL)
+
+sb_credits <- text_grob("Data: Pro Football Reference || Viz: @jktruong1 || #TidyTuesday",
+                             just = "center", hjust = 1, vjust = 0,
+                             rot = 0, face = NULL, size = 8)
+
+# Set up layout matrix
+
+lay <- rbind(c(1,1,1,1,1,1),
+             c(NA,2,2,2,2,NA),
+             c(3,3,3,3,3,3),
+             c(3,3,3,3,3,3),
+             c(3,3,3,3,3,3),
+             c(4,4,4,4,4,4),
+             c(4,4,4,4,4,4),
+             c(4,4,4,4,4,4),
+             c(NA,5,5,5,5,NA))
+
+
+# Combine all grobs and graphs together
+
+sb_margins_graph <- grid.arrange(sb_title,
+                                 sb_caption,
+                                 sb_off,
                                  sb_def,
-                                 nrow = 2)
+                                 sb_credits,
+                                 layout_matrix = lay)
