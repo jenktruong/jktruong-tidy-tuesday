@@ -13,6 +13,7 @@
 library(tidyverse)
 library(ggpubr)
 library(gridExtra)
+library(stringr)
 
 # -----
 # Read in Super Bowl data
@@ -38,11 +39,13 @@ sb_join <- dplyr::left_join(attendance,
 sb_join_clean <- sb_join %>% 
   rename("total_attendance" = "total") %>%  # Rename "total" column to reflect attendance
   filter(sb_winner == "Won Superbowl") %>%  # Filter to only teams that made it to playoffs
-  unite("full_team_name", team:team_name, sep = " ") # Combine team city and team name into one column
+  unite("full_team_name", team:year, sep = " ") # Combine team city and team name into one column
 
 # -----
 # Make two bar graphs for offensive and defensive rankings
 # -----
+
+# Offensive ranking bar graph
 
 sb_off <- ggplot(sb_join_clean,
                  aes(x = full_team_name,
@@ -51,10 +54,15 @@ sb_off <- ggplot(sb_join_clean,
   geom_hline(yintercept=0, color="red4", size=1) + # Draw abline to emphasize y = 0
   labs(x = "Team",
        y = "Offensive Ranking") + # Rename axis labels
+  scale_x_discrete(labels = str_wrap(sb_join_clean$full_team_name,
+                   width = 10)) + # Wrap axis tick labels
   theme_light() +
   theme(
-    axis.text = element_text(size = 8) # Adjust axis label font size
+    axis.text = element_text(size = 6), # Adjust axis label font size
+    axis.title = element_text(size = 10) # Adjust axis title font size
   )
+
+# Defensive ranking bar graph 
 
 sb_def <- ggplot(sb_join_clean,
                  aes(x = full_team_name,
@@ -63,9 +71,13 @@ sb_def <- ggplot(sb_join_clean,
   geom_hline(yintercept=0, color="blue4", size=1) + # Draw abline to emphasize y = 0
   labs(x = "Team",
        y = "Defensive Ranking") + # Rename axis labels
+  scale_x_discrete(labels = str_wrap(sb_join_clean$full_team_name,
+                                     width = 10)) + # Wrap axis tick labels
+  scale_y_continuous(limits = c(0.0,10.0)) + # Extend limits of y axis
   theme_light() +
   theme(
-    axis.text = element_text(size = 8), # Adjust axis label font size
+    axis.text = element_text(size = 6), # Adjust axis label font size
+    axis.title = element_text(size = 10) # Adjust axis title font size
   )
 
 # -----
