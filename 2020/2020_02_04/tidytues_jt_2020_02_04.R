@@ -54,6 +54,10 @@ sb_off <- ggplot(sb_join_clean,
   geom_hline(yintercept=0, color="red4", size=1) + # Draw abline to emphasize y = 0
   labs(x = "Team",
        y = "Offensive Ranking") + # Rename axis labels
+  geom_text(aes(label = offensive_ranking),
+            nudge_y = 0.5,
+            check_overlap = T, # Make sure labels don't overlap
+            size = 2) + # Add data labels
   scale_x_discrete(labels = str_wrap(sb_join_clean$full_team_name,
                    width = 9)) + # Wrap axis tick labels
   scale_y_continuous(lim = c(-2.0,12.0),
@@ -75,6 +79,10 @@ sb_def <- ggplot(sb_join_clean,
   geom_hline(yintercept=0, color="blue4", size=1) + # Draw abline to emphasize y = 0
   labs(x = "Team",
        y = "Defensive Ranking") + # Rename axis labels
+  geom_text(aes(label = defensive_ranking),
+    nudge_y = 0.5,
+    check_overlap = T, # Make sure labels don't overlap
+    size = 2) + # Add data labels
   scale_x_discrete(labels = str_wrap(sb_join_clean$full_team_name,
                                      width = 9)) + # Wrap axis tick labels
   scale_y_continuous(lim = c(-2.0,12.0),
