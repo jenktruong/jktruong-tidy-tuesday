@@ -14,6 +14,7 @@ library(tidyverse)
 library(ggpubr)
 library(gridExtra)
 library(stringr)
+library(here)
 
 # -----
 # Read in Super Bowl data
@@ -131,9 +132,23 @@ lay <- rbind(c(1,1,1,1,1,1),
 
 # Combine all grobs and graphs together
 
-sb_margins_graph <- grid.arrange(sb_title,
-                                 sb_caption,
-                                 sb_off,
-                                 sb_def,
-                                 sb_credits,
-                                 layout_matrix = lay)
+grid.arrange(sb_title,
+             sb_caption,
+             sb_off,
+             sb_def,
+             sb_credits,
+             layout_matrix = lay)
+
+# Save as graph
+g <- arrangeGrob(sb_title,
+                 sb_caption,
+                 sb_off,
+                 sb_def,
+                 sb_credits,
+                 layout_matrix = lay) #generates g
+
+ggsave(here("2020", "2020_02_04","tidytuesday_superbowl.png"), g,
+       width = 9,
+       height = 5,
+       units = "in",
+       dpi = 300) #saves graph as png
