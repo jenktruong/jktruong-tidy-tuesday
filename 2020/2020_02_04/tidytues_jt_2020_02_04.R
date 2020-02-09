@@ -62,7 +62,7 @@ sb_off <- ggplot(sb_join_clean,
             check_overlap = T, # Make sure labels don't overlap
             size = 3) + # Add data labels
   scale_x_discrete(labels = str_wrap(sb_join_clean$full_team_name,
-                   width = 9)) + # Wrap axis tick labels
+                   width = 6)) + # Wrap axis tick labels
   scale_y_continuous(lim = c(-4.0,14.0), # Have y-axis start at -4 and end at 14
                      expand = c(0,0)) + # Extend limits of y axis
   theme_light() +
@@ -89,8 +89,8 @@ sb_def <- ggplot(sb_join_clean,
             check_overlap = T, # Make sure labels don't overlap
             size = 3) + # Add data labels
   scale_x_discrete(labels = str_wrap(sb_join_clean$full_team_name,
-                                     width = 9)) + # Wrap axis tick labels
-  scale_y_continuous(lim = c(-4.0,12.0), # Have y-axis start at -4 and end at 12
+                                     width = 7)) + # Wrap axis tick labels
+  scale_y_continuous(lim = c(-4.0,14.0), # Have y-axis start at -4 and end at 14
                      expand = c(0,0)) + # Extend limits of y axis
   theme_light() +
   theme(
