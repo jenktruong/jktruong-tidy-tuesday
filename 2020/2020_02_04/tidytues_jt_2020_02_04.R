@@ -56,10 +56,10 @@ sb_off <- ggplot(sb_join_clean,
        y = "Offensive Ranking") + # Rename axis labels
   geom_text(aes(y=ifelse(offensive_ranking<0, # Condition for negative rankings
                          offensive_ranking-1, # Move values one unit below bar
-                         offensive_ranking+1), # For positive values, move values one unit above bar
+                         offensive_ranking+1.5), # For positive values, move values one unit above bar
                          label = offensive_ranking), 
             check_overlap = T, # Make sure labels don't overlap
-            size = 2) + # Add data labels
+            size = 3) + # Add data labels
   scale_x_discrete(labels = str_wrap(sb_join_clean$full_team_name,
                    width = 9)) + # Wrap axis tick labels
   scale_y_continuous(lim = c(-4.0,14.0), # Have y-axis start at -4 and end at 14
@@ -79,14 +79,14 @@ sb_def <- ggplot(sb_join_clean,
                      y = defensive_ranking)) +
   geom_col(fill = "steelblue3") + # Color bars blue
   geom_hline(yintercept=0, color="blue4", size=1) + # Draw abline to emphasize y = 0
-  labs(x = "Team",
+  labs(x = "Team and Season Year",
        y = "Defensive Ranking") + # Rename axis labels
   geom_text(aes(y=ifelse(defensive_ranking<0, # Condition for negative rankings
                          defensive_ranking-1, # Move values one unit below bar
-                         defensive_ranking+1), # For positive values, move values one unit above bar
+                         defensive_ranking+1.5), # For positive values, move values one unit above bar
                 label = defensive_ranking), 
             check_overlap = T, # Make sure labels don't overlap
-            size = 2) + # Add data labels
+            size = 3) + # Add data labels
   scale_x_discrete(labels = str_wrap(sb_join_clean$full_team_name,
                                      width = 9)) + # Wrap axis tick labels
   scale_y_continuous(lim = c(-4.0,12.0), # Have y-axis start at -4 and end at 12
