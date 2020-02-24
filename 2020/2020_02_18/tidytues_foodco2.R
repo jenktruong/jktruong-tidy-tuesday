@@ -106,7 +106,15 @@ total_co2_table <- clean_table %>%
     sum_co2 = sum(co2_emmission)
   ) # Add total emissions
 
+# Create subset for top 10 countries for CO2 emissions
+
+top_10_co2 <- total_co2_table %>% 
+  arrange(-sum_co2) %>% # Arrange by total emissions in descending order
+  top_n(10) # Keep top 10
+
 # Create subset only focusing on poultry, fish, pork, and beef 
 
 ppfb_table <- clean_table %>% 
-  filter(food_category %in% c("Poultry", "Fish", "Pork", "Beef"))
+  filter(food_category %in% c("Poultry", "Fish", "Pork", "Beef")) %>% 
+  filter(country %in% top_10_co2$country) # Filter by country from top 10 subset dataframe
+
