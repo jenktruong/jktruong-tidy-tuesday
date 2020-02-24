@@ -102,7 +102,11 @@ clean_table %>%
 
 total_co2_table <- clean_table %>% 
   group_by(country) %>% # Group by country
-  mutate(
-    sum_co2 = sum(co2_emmission) # Sum CO2 emissions for each country
-  )
+  summarize(
+    sum_co2 = sum(co2_emmission)
+  ) # Add total emissions
 
+# Create subset only focusing on poultry, fish, pork, and beef 
+
+ppfb_table <- clean_table %>% 
+  filter(food_category %in% c("Poultry", "Fish", "Pork", "Beef"))
