@@ -4,14 +4,18 @@
 # Jennifer Truong
 ############
 
-# Attach packages
+#####
+# 1. Attach packages
+#####
 
 library(tidyverse)
 library(janitor)
 library(here)
 library(rvest)
 
-# Read in data
+#####
+# 2. Read in data
+#####
 
 food_consumption <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-02-18/food_consumption.csv')
 
@@ -98,6 +102,10 @@ clean_table %>%
 # END Cleaning Script
 #######
 
+#####
+# 3. Wrangle data
+#####
+
 # Sum up total CO2 emissions per country
 
 total_co2_table <- clean_table %>% 
@@ -118,3 +126,22 @@ ppfb_table <- clean_table %>%
   filter(food_category %in% c("Poultry", "Fish", "Pork", "Beef")) %>% 
   filter(country %in% top_10_co2$country) # Filter by country from top 10 subset dataframe
 
+#####
+# 4. Time to create bar graph!
+#####
+
+# Create bar graphs
+ggplot(ppfb_table,
+       aes(x = food_category,
+           y = consumption)) +
+  geom_col(aes(fill = food_category,
+               color = food_category), # Color bars by food category
+           show.legend = FALSE) + # Don't show legend 
+  scale_y_continuous(expand = c(0,0)) + # Expand y-axis to avoid weird gap below 0
+  facet_wrap( ~ country, # Facet by country
+              nrow = 2, # 2 rows
+              ncol = 5) + # 5 columns
+  labs(x = "Animal Protein Types",
+       y = "Consumption (kg/person/year)",
+       title = "Animal Protein Consumption of Top 10 Carbon-Emitting Countries") + # Add axis labels and title
+  theme_light()
