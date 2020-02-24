@@ -144,4 +144,7 @@ ggplot(ppfb_table,
   labs(x = "Animal Protein Types",
        y = "Consumption (kg/person/year)",
        title = "Animal Protein Consumption of Top 10 Carbon-Emitting Countries") + # Add axis labels and title
-  theme_light()
+  theme_light() +
+  theme(
+    plot.title = element_text(hjust = 0.5) # Center plot title
+  )
