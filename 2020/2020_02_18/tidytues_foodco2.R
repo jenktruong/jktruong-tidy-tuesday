@@ -39,7 +39,7 @@ total_co2_table <- food_consumption %>%
 top_10_co2 <- total_co2_table %>% 
   arrange(-sum_co2) %>% # Arrange by total emissions in descending order
   top_n(10) # Keep top 10
-
+  
 # Create subset only focusing on poultry, fish, pork, and beef 
 
 ppfb_table <- food_consumption %>% 
